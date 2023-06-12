@@ -1,55 +1,34 @@
-# Satellite Rooftop Counter
+# Rooftop Counting System using Satellite Images
 
-![Satellite Rooftop Counter](https://link-to-your-image.com)
+This repository contains code for a rooftop counting system that utilizes satellite images to accurately estimate the number of rooftops in a given area. The system employs a combination of image processing techniques and machine learning algorithms to achieve precise results.
 
-## Overview
-The Satellite Rooftop Counter is a Python-based software tool designed to automatically count the number of rooftops in satellite images. It employs computer vision techniques to analyze satellite imagery and extract information about rooftops, enabling efficient and accurate counting.
+## Getting the Images
 
-## Key Features
-- Automated rooftop counting: The code utilizes advanced image processing algorithms to identify and count rooftops in satellite images without manual intervention.
-- Support for multiple image formats: The code supports various common image formats, allowing flexibility in working with different types of satellite imagery.
-- Configurable parameters: The code provides adjustable parameters to fine-tune the rooftop detection process according to specific requirements or image characteristics.
-- High accuracy and reliability: Leveraging state-of-the-art computer vision techniques, the algorithm achieves high accuracy and reliability in rooftop identification and counting.
-- Scalability: The code is designed to handle large datasets of satellite images efficiently, enabling processing of multiple images in parallel for improved scalability.
+To obtain the necessary images for training and testing, QGIS (Geographic Information System) is used in conjunction with Google satellite maps. The marking of each rooftop is done by placing dots on a separate layer positioned above the satellite map. The system allows for easy toggling between the marked dots and the satellite image layers.
 
-## Dependencies
-- Python 3.x
-- OpenCV
-- NumPy
-- Matplotlib
-- PyTorch
+## Image Export
 
-## Installation
-1. Clone the repository: `git clone https://github.com/your-username/satellite-rooftop-counter.git`
-2. Install the required dependencies: `pip install -r requirements.txt`
+Once the rooftops are marked, the system exports the satellite images with the following specifications:
+- Scale: 1:2500
+- Resolution: 96 dpi
+- Width x Height: 1066 px x 532 px
+   
+Dot specifications are as follow:
+- size > 2mm
+- orange color
 
-## Usage
-1. Place your satellite images in the `images` directory.
-2. Configure the parameters in the `config.py` file as per your requirements.
-3. Run the script: `python count_rooftops.py`
-4. The program will process the images and display the results, including the count of rooftops.
+## Dots Extraction and Density Map Generation
 
-## Example
-```python
-import cv2
-from rooftop_counter import RooftopCounter
+The exported images with marked dots are processed using Python code. The code extracts the dots' coordinates from each exported image and saves them in CSV format. These CSV files are then utilized to replot the dots onto new images. The system employs a K-Tree algorithm to generate a density map based on the replotting of the dots. These density maps serve as the ground truth for the system.
 
-# Load an image
-image_path = 'images/satellite_image.jpg'
-image = cv2.imread(image_path)
+## CSRNet Integration
 
-# Create a RooftopCounter object
-counter = RooftopCounter()
+After generating the density maps, the system follows the CSRNet code. CSRNet (Convolutional Social Pooling) is a powerful crowd counting model that has been adapted for rooftop counting in this project. By integrating the CSRNet code, the system performs further analysis and processing on the density maps to accurately estimate the number of rooftops in the given area.
 
-# Process the image and get the rooftop count
-rooftop_count = counter.count_rooftops(image)
+With this repository, you can explore the code, replicate the system's functionality, and adapt it to your own projects involving rooftop counting from satellite images. The clear instructions and provided dataset make it easier to understand and implement the system.
 
-# Display the result
-print(f"The image contains {rooftop_count} rooftops.")
-```
+**Note:** Proper attribution and acknowledgment of the original CSRNet code are included in this repository.
 
-## License
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
+We welcome contributions, bug reports, and feature requests. Feel free to open issues or submit pull requests to help enhance the system.
 
-## Acknowledgements
-We would like to thank the open-source community for their valuable contributions and the developers of the libraries and frameworks used in this project.
+Get started with rooftop counting using satellite images today!
