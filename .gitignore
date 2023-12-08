@@ -1,2 +1,5 @@
 .ipynb_checkpoints/
 .__pycache__/
+
+# exclude tar - model too large for github
+*.tar
