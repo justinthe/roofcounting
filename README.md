@@ -4,22 +4,19 @@ This repository contains code for a rooftop counting system that utilizes satell
 
 ## Getting the Images
 
-To obtain the necessary images for training and testing, QGIS (Geographic Information System) is used in conjunction with Google satellite maps. The marking of each rooftop is done by placing dots on a separate layer positioned above the satellite map. The system allows for easy toggling between the marked dots and the satellite image layers.
+To obtain the necessary images for training and testing, QGIS (Geographic Information System) is used in conjunction with Google satellite maps. The marking of each rooftop is done by placing dots on a separate layer positioned above the satellite map. 
 
 ## Image Export
 
 Once the rooftops are marked, the system exports the satellite images with the following specifications:
 - Scale: 1:2500
 - Resolution: 96 dpi
-- Width x Height: 1066 px x 532 px
+- Width x Height: 1056 px x 816 px
    
-Dot specifications are as follow:
-- size > 2mm
-- orange color
 
 ## Dots Extraction and Density Map Generation
 
-The exported images with marked dots are processed using Python code. The code extracts the dots' coordinates from each exported image and saves them in CSV format. These CSV files are then utilized to replot the dots onto new images. The system employs a K-Tree algorithm to generate a density map based on the replotting of the dots. These density maps serve as the ground truth for the system.
+The exported images with marked dots are processed using Python code. The code (01_create_cssv) extracts the dots' coordinates from each dbf files and saves them in csv format. These CSV files are then utilized to replot the dots onto new images. The system employs a K-Tree algorithm to generate a density map based on the replotting of the dots. These density maps serve as the ground truth for the system.
 
 ## CSRNet Integration
 
